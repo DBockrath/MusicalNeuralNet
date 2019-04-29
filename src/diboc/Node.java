@@ -12,15 +12,29 @@ public class Node {
 
     }
 
-    public Object outputState() {
+    public double outputState() {
 
-        return previous.outputState();
+        return previous.outputState() * sigmoid(previous.output());
 
     }
 
-    public Object output(Object input) {
+    public double output() {
 
-        return input;
+        return previous.output();
+
+    }
+
+    private double sigmoid(double input) {
+
+        return (Math.pow(Math.E, input)) /
+                (1 + Math.pow(Math.E, input));
+
+    }
+
+    private double tanh(double input) {
+
+        return (Math.pow(Math.E, input) - Math.pow(Math.E, (-1 * input))) /
+                (Math.pow(Math.E, input) + Math.pow(Math.E, (-1 * input)));
 
     }
 
