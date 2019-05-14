@@ -1,26 +1,55 @@
 package diboc;
 
-public class Node {
+import java.util.Vector;
 
-    private Node previous;
-    private Node next;
+public class Node<T> {
 
-    public Node(Node previous, Node next) {
+    // TODO: Use vectors instead of doubles
 
-        this.previous = previous;
-        this.next = next;
+    private Vector<T> input;
+    private Vector<T> previousCellOutput;
+
+    private double concatInput;
+    private double inputWeight;
+    private double previousCellOutputWeight;
+    private double inputBias;
+
+    public Node(Vector<T> previousCellOutput, Vector<T> input) {
+
+        this.input = input;
+        this.previousCellOutput = previousCellOutput;
+//        concatInput = previousCellOutput + input;
 
     }
 
-    public double outputState() {
+    private Vector<T> inputGate() {
 
-        return previous.outputState() * sigmoid(previous.output());
+//        return Math.tanh(inputBias + (input * inputWeight) + (previousCellOutput * previousCellOutputWeight));
+        return null;
 
     }
 
-    public double output() {
+    private Vector<T> forgetGate() {
 
-        return previous.output();
+        return null;
+
+    }
+
+    private Vector<T> outputGate() {
+
+        return null;
+
+    }
+
+    public Vector<T> outputState() {
+
+        return input;
+
+    }
+
+    public Vector<T> output() {
+
+        return input;
 
     }
 
