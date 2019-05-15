@@ -1,28 +1,46 @@
 package diboc;
 
+import java.util.Vector;
+
 public class LSTMNode {
 
     private LSTMNode previous;
     private LSTMNode next;
 
-    private double input;
-    private double state;
+    private Vector<Double> input;
+    private Vector<Double> state;
     private double weight;
     private double bias;
 
-    public LSTMNode(LSTMNode previous, double input, LSTMNode next) {
+    public LSTMNode(LSTMNode previous, Vector<Double> input, LSTMNode next) {
 
         this.previous = previous;
         this.next = next;
-        this.input = previous.output() + input;
         state = previous.outputState();
+        
+        try {
+            
+            this.input = add(previous.output(), input);
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            
+        }
 
     }
-
-    public double output() {
-
+    
+    public LSTMNode(LSTMNode previous, LSTMNode next) {
+        
+        this.previous = previous;
+        this.next = next;
+        
+    }
+    
+    public Vector<Double> getInput() {
+        
         return input;
-
+        
     }
 
     public LSTMNode getPrevious() {
@@ -36,6 +54,12 @@ public class LSTMNode {
         return next;
 
     }
+    
+    public void setInput(Vector<Double> input) {
+        
+        this.input = input;
+        
+    }
 
     public void setPrevious(LSTMNode previous) {
 
@@ -48,40 +72,80 @@ public class LSTMNode {
         this.next = next;
 
     }
+    
+    public Vector<Double> output() {
 
-    private double outputState() {
+        return input;
+
+    }
+
+    private Vector<Double> outputState() {
 
         return state;
 
     }
 
-    private double inputGate() {
+    private Vector<Double> inputGate() {
 
-        return 0;
-
-    }
-
-    private double forgetGate() {
-
-        return 0;
+        return null;
 
     }
 
-    private double outputGate() {
+    private Vector<Double> forgetGate() {
 
-        return 0;
-
-    }
-
-    private double sigmoid(double x) {
-
-        return Math.pow(Math.E, x) / (Math.pow(Math.E, x) + 1);
+        return null;
 
     }
 
-    private double tanh(double x) {
+    private Vector<Double> outputGate() {
 
-        return (Math.pow(Math.E, x) - Math.pow(Math.E, (-1 * x))) / (Math.pow(Math.E, x) + Math.pow(Math.E, (-1 * x)));
+        return null;
+
+    }
+    
+    private Vector<Double> add(Vector<Double> x, Vector<Double> y) throws Exception {
+        
+        if (x.size() != y.size())
+            throw new Exception("Vectors must be the same size to add.");
+        
+        Vector<Double> resultant = new Vector<>(x.size());
+        for (int i = 0; i < x.size(); i++)
+            resultant.set(i, (x.get(i) + y.get(i)));
+        
+        return resultant;
+        
+    }
+    
+    private Vector<Double> multiply(Vector<Double> x, Vector<Double> y) throws Exception {
+        
+        if (x.size() != y.size())
+            throw new Exception("Vectors must be the same size to multiply.");
+        
+        Vector<Double> resultant = new Vector<>(x.size());
+        for (int i = 0; i < x.size(); i++)
+            resultant.set(i, (x.get(i) * y.get(i)));
+        
+        return resultant;
+        
+    }
+
+    private Vector<Double> sigmoid(Vector<Double> x) {
+
+        Vector<Double> resultant = new Vector<>(x.size());
+        for (int i = 0; i < x.size(); i++)
+            resultant.set(i, (Math.pow(Math.E, x.get(i)) / (Math.pow(Math.E, x.get(i)) + 1)));
+        
+        return resultant;
+
+    }
+
+    private Vector<Double> tanh(Vector<Double> x) {
+        
+        Vector<Double> resultant = new Vector<>(x.size());
+        for (int i = 0; i < x.size(); i++)
+            resultant.set(i, ((Math.pow(Math.E, x.get(i)) - Math.pow(Math.E, (-1 * x.get(i)))) / (Math.pow(Math.E, x.get(i)) + Math.pow(Math.E, (-1 * x.get(i))))));
+        
+        return resultant;
 
     }
 

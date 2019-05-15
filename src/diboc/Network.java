@@ -5,25 +5,21 @@ import java.util.Vector;
 
 public class Network {
 
-    private Vector<Double> input;
     private LSTMNode firstNode;
     ArrayList<LSTMNode> hiddenLayer;
 
-    // TODO: Make the constructor not take a parameter.
+    public Network(int size) {
 
-    public Network(Vector<Double> input) {
-
-        this.input = input;
         hiddenLayer = new ArrayList<>();
 
-        firstNode = new LSTMNode(null, input.get(0), null);
+        firstNode = new LSTMNode(null, null);
         hiddenLayer.add(firstNode);
 
         int i = 1;
         LSTMNode current = firstNode;
-        while (i < input.size()) {
+        while (i < size) {
 
-            current.setNext(new LSTMNode(firstNode, input.get(i), null));
+            current.setNext(new LSTMNode(firstNode, null));
             i++;
             hiddenLayer.add(current);
             current = current.getNext();
@@ -34,8 +30,50 @@ public class Network {
 
     }
 
-    public Vector<Double> getOutput(Vector<Double> input) {
+    public Song getOutput(Genre input) throws Exception {
+        
+        /* TODO: Needs to turn Vector<Double> into Vector<Vector<Double>>
+         * The input will be a Vector<Double representing the key of the song or the genre of the song
+         * The output will be a Vector<Vector<Double>> that is essentially a song (Vector of notes)
+         */
+        
+//        if (input.size() != hiddenLayer.size())
+//            throw new Exception("Input length must match the number of hidden cells.");
+//        
+//        int i = 0;
+//        for (LSTMNode node : hiddenLayer)
+//            node.setInput(input.get(i++));
+//        
+//        Vector<Vector<Double>> resultant = new Vector<>(hiddenLayer.size());
+//        for (int j = 0; j < hiddenLayer.size(); j++)
+//            resultant.set(j, hiddenLayer.get(j).output());
+//
+//        return resultant;
+        
+        return null;
 
+    }
+    
+    public Song getOutput(Key input) throws Exception {
+        
+        /* TODO: Needs to turn Vector<Double> into Vector<Vector<Double>>
+         * The input will be a Vector<Double representing the key of the song or the genre of the song
+         * The output will be a Vector<Vector<Double>> that is essentially a song (Vector of notes)
+         */
+        
+//        if (input.size() != hiddenLayer.size())
+//            throw new Exception("Input length must match the number of hidden cells.");
+//        
+//        int i = 0;
+//        for (LSTMNode node : hiddenLayer)
+//            node.setInput(input.get(i++));
+//        
+//        Vector<Vector<Double>> resultant = new Vector<>(hiddenLayer.size());
+//        for (int j = 0; j < hiddenLayer.size(); j++)
+//            resultant.set(j, hiddenLayer.get(j).output());
+//
+//        return resultant;
+        
         return null;
 
     }

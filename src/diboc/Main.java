@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Music Generator");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
 
@@ -20,7 +20,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        // Use an LSTM
         launch(args);
 
     }
