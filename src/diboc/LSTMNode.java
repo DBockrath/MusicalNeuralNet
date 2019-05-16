@@ -18,15 +18,15 @@ public class LSTMNode {
         this.next = next;
         state = previous.outputState();
         
-        try {
-            
-            this.input = add(previous.output(), input);
-            
-        } catch (Exception e) {
-            
-            e.printStackTrace();
-            
-        }
+//        try {
+//
+//            this.input = add(previous.output(), input);
+//
+//        } catch (Exception e) {
+//
+//            e.printStackTrace();
+//
+//        }
 
     }
     
@@ -73,9 +73,9 @@ public class LSTMNode {
 
     }
     
-    public Vector<Double> output() {
+    public Note output() {
 
-        return input;
+        return null;
 
     }
 
