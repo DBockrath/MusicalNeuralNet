@@ -4,7 +4,6 @@ import java.util.Vector;
 
 public class Note extends Vector<Vector<Double>> {
 
-    private Length length;
     private double octave;
 
     public Note(Vector<Vector<Double>> note) throws Exception {
@@ -27,16 +26,22 @@ public class Note extends Vector<Vector<Double>> {
 
     public Length getLength() {
 
-        return length;
+        return binaryToLength(super.get(2));
 
     }
 
     public void setLength(Length length) {
 
-        this.length = length;
+        super.set(2, lengthToBinary(length));
 
     }
-
+    
+    public void setLength(Vector<Double> length) {
+        
+        super.set(2, length);
+        
+    }
+    
     private Pitch binaryToPitch(Vector<Double> pitch) {
 
         int highest = 0;
@@ -90,6 +95,53 @@ public class Note extends Vector<Vector<Double>> {
 
         }
 
+    }
+    
+    private Vector<Double> lengthToBinary(Length length) {
+        
+        Vector<Double> resultant = new Vector<>(6);
+        
+        int index = 0;
+        switch (length) {
+        
+        case WHOLE:
+            index = 0;
+            break;
+            
+        case HALF:
+            index = 1;
+            break;
+            
+        case QUARTER:
+            index = 2;
+            break;
+            
+        case EIGTH:
+            index = 3;
+            break;
+            
+        case SIXTEENTH:
+            index = 4;
+            break;
+            
+        case THIRTYSECOND:
+            index = 5;
+            break;
+        
+        }
+        
+        for (int i = 0; i < resultant.size(); i++) {
+            
+            if (i == index)
+                resultant.set(i, 1.0);
+            
+            else
+                resultant.set(i, 0.0);
+            
+        }
+        
+        return resultant;
+        
     }
 
     private Length binaryToLength(Vector<Double> length) {
