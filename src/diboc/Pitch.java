@@ -6,17 +6,13 @@ import java.io.IOException;
 
 public class Pitch {
 
+    private Pitches pitches;
     private Clip clip;
     private AudioInputStream audioInputStream;
 
-    public Pitch(Clip clip, AudioInputStream audioInputStream) {
-
-        this.clip = clip;
-        this.audioInputStream = audioInputStream;
-
-    }
-
     public Pitch(Pitches pitches) {
+
+        this.pitches = pitches;
 
         try {
 
@@ -52,6 +48,12 @@ public class Pitch {
 
         clip.stop();
         clip.close();
+
+    }
+
+    public Pitches getPitchEnum() {
+
+        return pitches;
 
     }
 
