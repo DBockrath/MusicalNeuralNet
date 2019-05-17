@@ -113,6 +113,17 @@ public class Note extends Vector<Vector<Double>> {
     }
 
     /*
+     * Playback of the Note
+     */
+
+    public void play(TimeSignature timeSignature) {
+
+        Pitch pitch = vectorToPitch(super.get(0));
+        pitch.play();
+
+    }
+
+    /*
      * For converting with vectors
      */
 
