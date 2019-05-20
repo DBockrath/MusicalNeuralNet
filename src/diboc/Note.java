@@ -1,6 +1,10 @@
 package diboc;
 
+import java.util.Date;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /* A Note is a vector of pitch and length vectors. The order goes as follows:
  * Index 0 = Pitch
@@ -119,7 +123,23 @@ public class Note extends Vector<Vector<Double>> {
     public void play(TimeSignature timeSignature) {
 
         Pitch pitch = vectorToPitch(super.get(0));
+
+        /*
+         * Use this link for help making conversions:
+         *
+         * https://music.stackexchange.com/questions/24140/how-can-i-find-the-length-in-seconds-of-a-quarter-note-crotchet-if-i-have-a-te
+         */
+
+        // TODO: Check this for accuracy. May not be giving the number desired.
+        double numOfSeconds = ((timeSignature.getBeat().getLength() / 4) * vectorToLength(super.get(1)).getLength()) * (60 / timeSignature.getBeatsPerMinute());
+        double numOfMillis = 1000 * numOfSeconds;
+
         pitch.play();
+        double currentTime = new Date().getTime();
+        double desiredTime = currentTime + numOfMillis;
+        while (currentTime < desiredTime)
+            currentTime = new Date().getTime();
+        pitch.stop();
 
     }
 
@@ -856,25 +876,33 @@ public class Note extends Vector<Vector<Double>> {
         
         int index = 0;
         switch (length) {
-            
-        case HALF:
+
+        case DOTTED_HALF:
             index = 1;
             break;
-            
-        case QUARTER:
+
+        case HALF:
             index = 2;
             break;
-            
-        case EIGTH:
+
+        case DOTTED_QUARTER:
             index = 3;
             break;
-            
-        case SIXTEENTH:
+
+        case QUARTER:
             index = 4;
             break;
             
-        case THIRTYSECOND:
+        case EIGTH:
             index = 5;
+            break;
+            
+        case SIXTEENTH:
+            index = 6;
+            break;
+            
+        case THIRTYSECOND:
+            index = 7;
             break;
         
         }
@@ -909,18 +937,21 @@ public class Note extends Vector<Vector<Double>> {
                 return Length.WHOLE;
 
             case 1:
-                return Length.HALF;
+                return Length.DOTTED_HALF;
 
             case 2:
-                return Length.QUARTER;
+                return Length.HALF;
 
             case 3:
-                return Length.EIGTH;
-
-            case 4:
-                return Length.SIXTEENTH;
+                return Length.DOTTED_QUARTER;
 
             case 5:
+                return Length.EIGTH;
+
+            case 6:
+                return Length.SIXTEENTH;
+
+            case 7:
                 return Length.THIRTYSECOND;
 
             default:
