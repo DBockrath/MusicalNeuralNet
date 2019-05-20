@@ -127,15 +127,19 @@ public class Note extends Vector<Vector<Double>> {
          * https://music.stackexchange.com/questions/24140/how-can-i-find-the-length-in-seconds-of-a-quarter-note-crotchet-if-i-have-a-te
          */
 
-        // TODO: Check this for accuracy. May not be giving the number desired.
-        double numOfSeconds = ((timeSignature.getBeat().getLength() / 4) * vectorToLength(super.get(1)).getLength()) * (60 / timeSignature.getBeatsPerMinute());
+        double numOfSeconds = ((timeSignature.getBeat().getLength() / 4) * vectorToLength(super.get(1)).getLength()) * (60.0 / timeSignature.getBeatsPerMinute());
         double numOfMillis = 1000 * numOfSeconds;
 
         pitch.play();
         double currentTime = new Date().getTime();
-        double desiredTime = currentTime + numOfMillis;
-        while (currentTime < desiredTime)
-            currentTime = new Date().getTime();
+        final double desiredTime = currentTime + numOfMillis;
+        if (currentTime < desiredTime) {
+
+            do currentTime = new Date().getTime();
+            while (currentTime < desiredTime);
+
+        }
+
         pitch.stop();
 
     }
