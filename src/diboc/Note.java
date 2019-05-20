@@ -2,9 +2,6 @@ package diboc;
 
 import java.util.Date;
 import java.util.Vector;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /* A Note is a vector of pitch and length vectors. The order goes as follows:
  * Index 0 = Pitch
