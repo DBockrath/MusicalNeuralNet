@@ -161,10 +161,6 @@ public class Note extends Vector<Vector<Double>> {
         int index = 0;
         switch (pitch) {
 
-            case A0:
-                index = 0;
-                break;
-
             case Bb0:
                 index = 1;
                 break;

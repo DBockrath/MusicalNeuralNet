@@ -11,24 +11,6 @@ public class LSTMNode {
     private Vector<Double> state;
     private double weight;
     private double bias;
-
-    public LSTMNode(LSTMNode previous, Vector<Double> input, LSTMNode next) {
-
-        this.previous = previous;
-        this.next = next;
-        state = previous.outputState();
-        
-//        try {
-//
-//            this.input = add(previous.output(), input);
-//
-//        } catch (Exception e) {
-//
-//            e.printStackTrace();
-//
-//        }
-
-    }
     
     public LSTMNode(LSTMNode previous, LSTMNode next) {
         
@@ -103,7 +85,7 @@ public class LSTMNode {
 
     }
     
-    private Vector<Double> add(Vector<Double> x, Vector<Double> y) throws Exception {
+    private Vector<Double> concatenate(Vector<Double> x, Vector<Double> y) throws Exception {
         
         if (x.size() != y.size())
             throw new Exception("Vectors must be the same size to add.");
