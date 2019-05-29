@@ -4,17 +4,17 @@ public class TimeSignature {
 
     private int beatsPerMinute;
     private int beatsPerMeasure;
-    private Length beat;
+    private Length getsTheBeat;
 
     /*
      * Constructor
      */
 
-    public TimeSignature(int beatsPerMinute, int beatsPerMeasure, Length beat) {
+    public TimeSignature(int beatsPerMinute, int beatsPerMeasure, Length getsTheBeat) {
 
         this.beatsPerMinute = beatsPerMinute;
         this.beatsPerMeasure = beatsPerMeasure;
-        this.beat = beat;
+        this.getsTheBeat = getsTheBeat;
 
     }
 
@@ -34,9 +34,9 @@ public class TimeSignature {
 
     }
 
-    public Length getBeat() {
+    public Length getGetsTheBeat() {
 
-        return beat;
+        return getsTheBeat;
 
     }
 
@@ -56,9 +56,9 @@ public class TimeSignature {
 
     }
 
-    public void setBeat(Length beat) {
+    public void setGetsTheBeat(Length getsTheBeat) {
 
-        this.beat = beat;
+        this.getsTheBeat = getsTheBeat;
 
     }
 

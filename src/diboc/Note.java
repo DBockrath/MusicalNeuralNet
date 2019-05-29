@@ -127,7 +127,7 @@ public class Note extends Vector<Vector<Double>> {
          * https://music.stackexchange.com/questions/24140/how-can-i-find-the-length-in-seconds-of-a-quarter-note-crotchet-if-i-have-a-te
          */
 
-        double numOfSeconds = ((timeSignature.getBeat().getLength() / 4) * vectorToLength(super.get(1)).getLength()) * (60.0 / timeSignature.getBeatsPerMinute());
+        double numOfSeconds = ((timeSignature.getGetsTheBeat().getLength() / 4) * vectorToLength(super.get(1)).getLength()) * (60.0 / timeSignature.getBeatsPerMinute());
         double numOfMillis = 1000 * numOfSeconds;
 
         pitch.play();
@@ -555,15 +555,17 @@ public class Note extends Vector<Vector<Double>> {
 
     private Pitch vectorToPitch(Vector<Double> pitch) {
 
-        int highest = 0;
+        double highest = pitch.get(0);
         for (int i = 1; i < pitch.size(); i++) {
 
-            if (pitch.get(highest) < pitch.get(i))
-                highest = i;
+            if (pitch.get(i) > highest)
+                highest = pitch.get(i);
 
         }
 
-        switch (highest) {
+        System.out.println(pitch.indexOf(highest));
+
+        switch (pitch.indexOf(highest)) {
 
             case 0:
                 return new Pitch(Pitches.A0);

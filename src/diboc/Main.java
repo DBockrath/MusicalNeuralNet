@@ -24,6 +24,11 @@ public class Main {
 
 //        launch(args);
 
+        Pitch pitch = new Pitch(Pitches.C4);
+        Note note = new Note(pitch, Length.WHOLE);
+        TimeSignature timeSignature = new TimeSignature(100, 4, Length.QUARTER);
+        note.play(timeSignature);
+
     }
 
 }
