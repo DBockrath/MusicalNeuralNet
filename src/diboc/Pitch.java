@@ -19,8 +19,9 @@ public class Pitch extends Vector<Double> {
 
         try {
 
-            clip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, AudioSystem.getAudioInputStream(new File("diboc\\PianoPitches\\Piano.ff." + pitches.name() + ".aiff")).getFormat()));
-            audioInputStream = AudioSystem.getAudioInputStream(new File("diboc\\PianoPitches\\Piano.ff." + pitches.name() + ".aiff"));
+            File file = new File("src/PianoPitches/Piano.ff." + pitches.name() + ".aiff");
+            clip = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, AudioSystem.getAudioInputStream(file).getFormat()));
+            audioInputStream = AudioSystem.getAudioInputStream(file);
 
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
 

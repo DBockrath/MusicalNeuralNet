@@ -156,7 +156,7 @@ public class Note extends Vector<Vector<Double>> {
 
     private Vector<Double> pitchToVector(Pitches pitch) {
 
-        Vector<Double> resultant = new Vector<>(88);
+        Vector<Double> resultant = new Vector<>();
 
         int index = 0;
         switch (pitch) {
@@ -539,15 +539,10 @@ public class Note extends Vector<Vector<Double>> {
 
         }
 
-        for (int i = 0; i < resultant.size(); i++) {
+        for (int i = 0; i < 88; i++)
+            resultant.add(0.0);
 
-            if (i == index)
-                resultant.set(i, 1.0);
-
-            else
-                resultant.set(i, 0.0);
-
-        }
+        resultant.set(index, 1.0);
 
         return resultant;
 
